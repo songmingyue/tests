@@ -1,34 +1,29 @@
 <template>
   <div class="dashboard-container">
-    <div class="table-watch">
-      <el-table
-        :data="tableData"
-        border
-        style="width: 100%"
-      >
-        <el-table-column
-          prop="kaNames"
-          label="卡片"
-        />
-        <el-table-column
-          prop="StockAmount"
-          label="数量"
-        />
-        <el-table-column
-          prop="rate"
-          label="概率"
-        />
-      </el-table>
+    <div class="knowledge-search">
+      <el-input v-model="inputKnowLedge" placeholder="请选择要查询的内容" />
+      <el-button @click="showAll = true">查看</el-button>
+    </div>
+    <!-- 现在只要一个死的，所以前端这边写死了 -->
+    <div v-if="showAll" class="know-all">
+      <div v-for="(item, index) in showAlls" :key="index">
+        <p class="value-ask">{{ item.test }}</p>
+        <p class="value-question">{{ item.value }}</p>
+        <p v-if="item.value2" class="value-question">{{ item.value2 }}</p>
+      </div>
     </div>
   </div>
 </template>
+
 <script>
-import axios from 'axios'
+import showAll from '@/utils/configuration'
 export default {
   name: 'Dashboard',
   data() {
     return {
-      tableData: []
+      inputKnowLedge: '',
+      showAll: false,
+      showAlls: showAll
     }
   },
   computed: {},
@@ -37,29 +32,24 @@ export default {
   },
   methods: {
     getNum() {
-      axios.post('https://apipro.playinjoy.com/legion/bstock').then(res => {
-        const kaName = {
-          '101': '浪',
-          '102': '漫',
-          '103': '波',
-          '104': '比'
-        }
-        if (res && res.data && res.data.Stock) {
-          const rates = res.data.MainPool
-          res.data.Stock.map((item, index) => {
-            // 数据处理，把code变为
-            item.kaNames = item.StockType === 2 ? `必中卡(${kaName[item.StockCode]})` : kaName[item.StockCode]
-            item.rate = index > 3 ? '' : rates[index].rate
-          })
-        }
-        this.tableData = res.data.Stock
-      })
+      console.log(showAll, 'showAll')
     }
   }
 }
 </script>
 <style scoped>
-.table-watch {
-  width: 80%;
+.dashboard-container {
+  padding: 15px;
+}
+.knowledge-search {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+.value-question {
+  background: #6abd;
+}
+.value-ask {
+  background: pink;
 }
 </style>

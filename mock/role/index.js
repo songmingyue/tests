@@ -27,8 +27,8 @@ const roles = [
       children: [
         {
           path: 'dashboard',
-          name: 'Dashboard',
-          meta: { title: 'dashboard', icon: 'dashboard' }
+          name: '知识库',
+          meta: { title: '知识库', icon: 'dashboard' }
         }
       ]
     }]
