@@ -2,37 +2,48 @@
   <div class="dashboard-container">
     <div class="knowledge-search">
       <el-input v-model="inputKnowLedge" placeholder="请选择要查询的内容" />
-      <el-button @click="showAll = true">查看</el-button>
+      <el-button :plain="true" @click="showAllMessage">查看</el-button>
     </div>
     <!-- 现在只要一个死的，所以前端这边写死了 -->
-    <div v-if="showAll" class="know-all">
+    <div v-if="showAlls.length" class="know-all">
       <div v-for="(item, index) in showAlls" :key="index">
-        <p class="value-ask">{{ item.test }}</p>
-        <p class="value-question">{{ item.value }}</p>
-        <p v-if="item.value2" class="value-question">{{ item.value2 }}</p>
+        <p>{{ index + 1 }}</p>
+        <p class="value-ask">{{ item.question }}</p>
+        <p class="value-question" v-html="item.answer_one" />
+        <p class="value-question" v-html="item.answer_two" />
+        <p class="value-ask">{{ item.additional_question }}</p>
+        <p class="value-question" v-html="item.additional_answer_one" />
+        <p class="value-question" v-html="item.additional_answer_two" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import showAll from '@/utils/configuration'
 export default {
   name: 'Dashboard',
   data() {
     return {
       inputKnowLedge: '',
+      showAlls: [],
       showAll: false,
-      showAlls: showAll
+      isShowMessage: false
     }
   },
   computed: {},
   created() {
-    this.getNum()
   },
   methods: {
-    getNum() {
-      console.log(showAll, 'showAll')
+    showAllMessage() {
+      if (!this.inputKnowLedge) {
+        this.$message('请填写第一条问题')
+        return
+      }
+      this.$http.post('/website/getMessage', {
+        getQuestionOne: this.inputKnowLedge
+      }).then(res => {
+        this.showAlls = res
+      })
     }
   }
 }

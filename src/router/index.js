@@ -73,7 +73,20 @@ export const constantRoutes = [
         path: 'dashboard',
         component: () => import('@/views/dashboard/index'),
         name: 'Dashboard',
-        meta: { title: '知识库', icon: 'dashboard', affix: true }
+        meta: { title: '知识库查询', icon: 'dashboard', affix: true }
+      }
+    ]
+  },
+  {
+    path: '/upLoad',
+    component: Layout,
+    redirect: '/upLoad',
+    children: [
+      {
+        path: 'upLoad',
+        component: () => import('@/views/upLoad/index'),
+        name: 'UpLoad',
+        meta: { title: '知识库添加', icon: 'dashboard', affix: true }
       }
     ]
   }
