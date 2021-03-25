@@ -21,20 +21,21 @@
             placeholder="请输入内容"
           />
         </el-form-item>
-        <!-- <div v-for="(item, index) in ruleForm.addOtherQuestion" :key="index">
+        <p class="p-span-big">+</p>
+        <div v-for="(item, index) in ruleForm.addOtherQuestion" :key="index">
           <el-form-item :prop="item.additionLabel">
-            <el-input v-model="item.additionalQuestion" placeholder="请输入内容"></el-input>
+            <el-input v-model="item.additionalQuestion" placeholder="请输入内容" />
           </el-form-item>
           <el-form-item :prop="item.asnwerLabel">
             <el-input
               v-model="item.questionOne"
               type="textarea"
               :rows="2"
-            ></el-input>
+            />
           </el-form-item>
-          <el-form-item :prop="item.answerLabelTwo"></el-form-item>
-        </div> -->
-        <el-form-item label="问题延展1" prop="additionalQuestion">
+          <el-form-item :prop="item.answerLabelTwo" />
+        </div>
+        <!-- <el-form-item label="问题延展1" prop="additionalQuestion">
           <el-input v-model="ruleForm.additionalQuestion" placeholder="请输入内容" />
         </el-form-item>
         <el-form-item label="我们的回答1" prop="additionalAnswerOne">
@@ -52,7 +53,7 @@
             :rows="2"
             placeholder="请输入内容"
           />
-        </el-form-item>
+        </el-form-item> -->
         <!-- <div  >
           <el-form-item :prop="item.label">
             <el-input
@@ -62,8 +63,6 @@
             <span @click="jianshao(index)">-</span>
           </el-form-item>
         </div> -->
-
-        <!-- <p @click="addQuestion">+</p> -->
         <el-form-item>
           <el-button :plain="true" @click="submitForm('ruleForm')">提交</el-button>
         </el-form-item>
@@ -121,10 +120,14 @@ export default {
       })
     },
     addQuestion() {
-      this.ruleForm.addOtherQuestion.push({
-        label: '11',
-        labels: '22'
-      })
+      const qest = {
+        quseLabel: `问题${this.ruleForm.additionalQuestion.length + 1}`,
+        question: '',
+        aswerLabel: '回答',
+        answerOne: '',
+        answerTwo: ''
+      }
+      this.ruleForm.addOtherQuestion.push(qest)
     },
     jianshao() {
       this.ruleForm.addOtherQuestion.splice()
@@ -142,5 +145,9 @@ export default {
 .red-tixing {
   font-size: 10px;
   color: brown;
+}
+.p-span-big {
+  font-size: 16px;
+  font-weight: 900;
 }
 </style>
