@@ -45,6 +45,19 @@ export const constantRoutes = [
     ]
   },
   {
+    path: '/',
+    component: Layout,
+    redirect: '/dashboard',
+    children: [
+      {
+        path: 'dashboard',
+        component: () => import('@/views/dashboard/index'),
+        name: 'Dashboard',
+        meta: { title: '知识库查询', icon: 'dashboard', affix: true }
+      }
+    ]
+  },
+  {
     path: '/login',
     component: () => import('@/views/login/index'),
     hidden: true
@@ -65,31 +78,37 @@ export const constantRoutes = [
     hidden: true
   },
   {
-    path: '/',
+    path: '/create',
     component: Layout,
-    redirect: '/dashboard',
+    redirect: '/create',
+    meta: { title: '知识库编辑&&添加', icon: '', affix: true },
     children: [
       {
-        path: 'dashboard',
-        component: () => import('@/views/dashboard/index'),
-        name: 'Dashboard',
-        meta: { title: '知识库查询', icon: 'dashboard', affix: true }
-      }
-    ]
-  },
-  {
-    path: '/upLoad',
-    component: Layout,
-    redirect: '/upLoad',
-    children: [
-      {
-        path: 'upLoad',
-        component: () => import('@/views/upLoad/index'),
-        name: 'UpLoad',
+        path: 'create',
+        component: () => import('@/views/Create/index'),
+        name: 'Create',
         meta: { title: '知识库添加', icon: 'dashboard', affix: true }
+      },
+      {
+        path: 'detail',
+        component: () => import('@/views/Detail/index'),
+        name: 'detail'
       }
     ]
   }
+  // {
+  //   path: '/detail',
+  //   component: Layout,
+  //   redirect: '/detail',
+  //   children: [
+  //     {
+  //       path: 'detail',
+  //       component: () => import('@/views/Detail/index'),
+  //       name: 'detail',
+  //       meta: { title: '知识库详情', icon: 'dashboard', affix: true }
+  //     }
+  //   ]
+  // }
 ]
 
 /**
