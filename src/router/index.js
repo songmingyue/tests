@@ -48,12 +48,40 @@ export const constantRoutes = [
     path: '/',
     component: Layout,
     redirect: '/dashboard',
+    meta: { title: '企业信息' },
     children: [
       {
         path: 'dashboard',
         component: () => import('@/views/dashboard/index'),
         name: 'Dashboard',
-        meta: { title: '知识库查询', icon: 'dashboard', affix: true }
+        meta: { title: '企业概况', icon: 'dashboard', affix: true }
+      },
+      {
+        path: 'detail',
+        component: () => import('@/views/dashboard/detail'),
+        name: 'Detail',
+        meta: { title: '企业需求', icon: 'dashboard', affix: true }
+      },
+      {
+        path: 'kaipiao',
+        component: () => import('@/views/dashboard/kaipiao'),
+        name: 'kaipiao',
+        meta: { title: '开票', icon: 'dashboard', affix: true },
+        hidden: true
+      },
+      {
+        path: 'create',
+        component: () => import('@/views/dashboard/create'),
+        name: 'create',
+        meta: { title: '新建需求', icon: 'dashboard', affix: true },
+        hidden: true
+      },
+      {
+        path: 'pingjia',
+        component: () => import('@/views/dashboard/pingjia'),
+        name: 'pingjia',
+        meta: { title: '评价', icon: 'dashboard', affix: true },
+        hidden: true
       }
     ]
   },
@@ -76,36 +104,16 @@ export const constantRoutes = [
     path: '/401',
     component: () => import('@/views/error-page/401'),
     hidden: true
-  },
-  {
-    path: '/create',
-    component: Layout,
-    redirect: '/create',
-    meta: { title: '知识库编辑&&添加', icon: '', affix: true },
-    children: [
-      {
-        path: 'create',
-        component: () => import('@/views/Create/index'),
-        name: 'Create',
-        meta: { title: '知识库添加', icon: 'dashboard', affix: true }
-      },
-      {
-        path: 'detail',
-        component: () => import('@/views/Detail/index'),
-        name: 'detail'
-      }
-    ]
   }
   // {
-  //   path: '/detail',
+  //   path: '/shuju',
   //   component: Layout,
-  //   redirect: '/detail',
+  //   redirect: '/shuju',
+  //   meta: { title: '数据查看', icon: '', affix: true },
   //   children: [
   //     {
-  //       path: 'detail',
-  //       component: () => import('@/views/Detail/index'),
-  //       name: 'detail',
-  //       meta: { title: '知识库详情', icon: 'dashboard', affix: true }
+  //       path: 'list',
+  //       component: () => import('@/views/shuju/index'),
   //     }
   //   ]
   // }
